@@ -144,7 +144,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     SECURE_PROXY_SLL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Разрешены все заголовки хостов.
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['learning-log-anton.herokuapp.com']
     DEBUG = False
 
     # Конфигурация статических ресурсов
