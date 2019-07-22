@@ -13,10 +13,12 @@ def index(request):
 
 def topics(request):
     '''Выводит список всех тем'''
-    if request.user:
-        topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    else:
+    
+    if request.user.is_anonymous:
         topics = Topic.objects.filter(public=True).order_by('date_added')
+    else:
+        topics = Topic.objects.filter(owner=request.user).order_by('date_added') | Topic.objects.filter(public=True).order_by('date_added')
+
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -122,3 +124,4 @@ def check_topic_owner(request, topic):
     # Проверка того, что тема принадлежит текущему пользователю.
     if topic.owner != request.user:
         raise Http404
+
